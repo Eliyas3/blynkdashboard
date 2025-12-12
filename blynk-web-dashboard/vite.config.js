@@ -4,5 +4,5 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: './', // Relative paths for standalone deployment
+  base: '/blynkdashboard/', // GitHub Pages subdirectory for new repo
 })
