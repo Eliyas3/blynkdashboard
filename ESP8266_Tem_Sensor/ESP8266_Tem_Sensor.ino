@@ -32,9 +32,8 @@ const char* password = "YourPassword";     // ← UPDATE WITH YOUR WiFi PASSWORD
 // const char* SERVER_HOST = "10.35.136.23";  // Your computer's local IP
 // const int SERVER_PORT = 8080;  // Local WebSocket server port
 
-// ===== PRODUCTION (Option 2) - Render Deployment =====
-// Using deployed Render server (ACTIVE)
-const char* SERVER_HOST = "blynkdash-2.onrender.com";
+// ===== PRODUCTION - Render Deployment (ACTIVE) =====
+const char* SERVER_HOST = "blynkdashboard.onrender.com";
 const int SERVER_PORT = 80;  // Use 80 for WS (Render handles SSL at edge)
 
 
