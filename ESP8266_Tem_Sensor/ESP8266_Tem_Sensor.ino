@@ -27,11 +27,16 @@ DHT dht(DHTPIN, DHTTYPE);
 const char* ssid = "YourNetworkName";      // ← UPDATE WITH YOUR WiFi NAME
 const char* password = "YourPassword";     // ← UPDATE WITH YOUR WiFi PASSWORD
 
-// ===== Deployed Backend Server =====
-// UPDATE THIS after deploying to Render.com
-// Example: "blynk-websocket-server.onrender.com" or your actual Render URL
-const char* SERVER_HOST = "blynk-websocket-server.onrender.com";
-const int SERVER_PORT = 80;  // Use 80 for WS or 443 for WSS
+// ===== TESTING LOCALLY (Option 1) =====
+// Use your computer's IP address for local testing
+// const char* SERVER_HOST = "10.35.136.23";  // Your computer's local IP
+// const int SERVER_PORT = 8080;  // Local WebSocket server port
+
+// ===== PRODUCTION (Option 2) - Render Deployment =====
+// Using deployed Render server (ACTIVE)
+const char* SERVER_HOST = "blynkdash-2.onrender.com";
+const int SERVER_PORT = 80;  // Use 80 for WS (Render handles SSL at edge)
+
 
 // ===== Device Credentials =====
 const char* AUTH_TOKEN = "fxwQ4WiGdw4rQOeeOb0C";  // Single auth token for all sensors

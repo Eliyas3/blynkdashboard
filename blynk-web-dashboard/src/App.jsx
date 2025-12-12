@@ -89,13 +89,14 @@ function App() {
   };
 
   useEffect(() => {
-    // Try to connect to WebSocket server
+    // Try to connect to WebSocket server (optional)
     let ws;
     let reconnectTimeout;
 
     const connect = () => {
       try {
-        ws = new WebSocket('ws://localhost:8080');
+        const wsUrl = import.meta.env.VITE_WS_URL || 'ws://localhost:8080';
+        ws = new WebSocket(wsUrl);
 
         ws.onopen = () => {
           console.log('✅ Connected to WebSocket server');
@@ -145,20 +146,24 @@ function App() {
           console.log('❌ Disconnected from WebSocket');
           setWsConnected(false);
           setDeviceConnected(false);
-          // Try to reconnect after 5 seconds
-          reconnectTimeout = setTimeout(connect, 5000);
+          // Don't reconnect in production without backend
+          if (wsUrl.includes('localhost')) {
+            reconnectTimeout = setTimeout(connect, 5000);
+          }
         };
 
         ws.onerror = (error) => {
-          console.error('WebSocket error:', error);
+          console.log('WebSocket connection not available - running in offline mode');
+          // Don't spam errors - just fail silently
           ws.close();
         };
       } catch (e) {
-        console.error('Failed to create WebSocket:', e);
-        reconnectTimeout = setTimeout(connect, 5000);
+        console.log('WebSocket not available - app will work in offline mode');
+        // Don't try to reconnect if WebSocket is not available
       }
     };
 
+    // Only try to connect if not in production or if we have a backend URL
     connect();
 
     return () => {
@@ -166,6 +171,7 @@ function App() {
       if (ws) ws.close();
     };
   }, []);
+
 
   const handleSelectProject = (project) => {
     setCurrentProject(project);
