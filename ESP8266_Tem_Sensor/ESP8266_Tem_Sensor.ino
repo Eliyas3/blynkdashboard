@@ -24,12 +24,14 @@ using namespace websockets;
 DHT dht(DHTPIN, DHTTYPE);
 
 // ===== WiFi Credentials =====
-const char* ssid = "YourNetworkName";
-const char* password = "YourPassword";
+const char* ssid = "YourNetworkName";      // ← UPDATE WITH YOUR WiFi NAME
+const char* password = "YourPassword";     // ← UPDATE WITH YOUR WiFi PASSWORD
 
-// ===== Server =====
-const char* SERVER_IP = "10.35.138.153";
-const int SERVER_PORT = 8080;
+// ===== Deployed Backend Server =====
+// UPDATE THIS after deploying to Render.com
+// Example: "blynk-websocket-server.onrender.com" or your actual Render URL
+const char* SERVER_HOST = "blynk-websocket-server.onrender.com";
+const int SERVER_PORT = 80;  // Use 80 for WS or 443 for WSS
 
 // ===== Device Credentials =====
 const char* AUTH_TOKEN = "fxwQ4WiGdw4rQOeeOb0C";  // Single auth token for all sensors
@@ -78,7 +80,7 @@ void connectWiFi() {
 }
 
 void connectWebSocket() {
-  String wsUrl = String("ws://") + SERVER_IP + ":" + SERVER_PORT;
+  String wsUrl = String("ws://") + SERVER_HOST + ":" + SERVER_PORT;
   Serial.print("\n🔌 Server: ");
   Serial.println(wsUrl);
   
